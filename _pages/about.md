@@ -9,7 +9,7 @@ profile:
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
   address: >
-    <p>AHF B55</p>
+    <p>University of Southern California</p>
     <p>3616 Trousdale Parkway</p>
     <p>Los Angeles, CA 90089</p>
 
