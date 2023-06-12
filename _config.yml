@@ -2,7 +2,7 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: Spatial Statistics and Public Health # the website title (if blank, full name will be used instead)
+title:  # the website title (if blank, full name will be used instead)
 first_name: Andy
 middle_name: R.
 last_name: Kampfschulte 
@@ -270,8 +270,8 @@ display_tags: ['formatting', 'images', 'links', 'math', 'code'] # these tags wil
 
 scholar:
 
-  last_name: [Einstein]
-  first_name: [Albert, A.]
+  last_name: [Kampfschulte]
+  first_name: [Andy]
 
   style: apa
   locale: en
