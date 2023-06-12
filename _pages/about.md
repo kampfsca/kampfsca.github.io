@@ -19,8 +19,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+My name is Andy Kampfschulte, I am a PhD student in the University of Southern California's Population, Health and Place program. I enjoy exploring the intersection of spatial sciences and statistics, and my research works to improve and shed light on statistical considerations in spatial public health. Spatial context is important when evaluating peoples exposures, and we need to make sure we are asking the right questions and using the right methods when incorpration spatial dimension.
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+I really like R programming, LateX, and musing about the importance of reproducible research. I try to extoll the values of Opensource software wherever I can, much to the annoyance of my peers.
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](http://fortawesome.github.io/Font-Awesome/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
