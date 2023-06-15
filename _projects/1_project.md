@@ -2,7 +2,7 @@
 layout: page
 title: Firewise Buffer Analysis
 description: Visualizing site buffers with Magick
-img: assets/img/12.jpg
+img: assets/img/FHSZ.png
 importance: 1
 category: work
 ---
