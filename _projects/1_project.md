@@ -1,80 +1,142 @@
 ---
 layout: page
-title: project 1
-description: a project with a background image
+title: Firewise Buffer Analysis
+description: Visualizing site buffers with Magick
 img: assets/img/12.jpg
 importance: 1
 category: work
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+**The Problem:** I've got a list of lat-long coordinates for [Firewise](https://www.nfpa.org/Public-Education/Fire-causes-and-risks/Wildfire/Firewise-USA) sites across California, and I want to understand, ata rudimentary level, where these sites fall in the grand scheme of Wildfire Hazard. 
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+The sites are spread throughout California, and I have a suspicion there's some regionality trends I might want to delve into later, so I do a some basic K-nearest neighbor clustering to split the sites into four distinct groups: Southern Cali (green), the Bary Area (red), Northern Cali (yellow), and the Sierras (blue). 
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.html path="assets/img/sitemap.png" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
+    Site Map of Firewise Sites (circa 2021)
 </div>
+
+Then, I've got this underlying Fire Hazard Severity Map from CALFIRE.
+
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.html path="assets/img/FHSZ.png" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-    This image can also have a caption. It's like magic.
-</div>
-
-You can also put regular text between your rows of images.
-Say you wanted to write a little bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, *bled* for your project, and then... you reveal its glory in the next row of images.
-
-
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.html path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.html path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
+    Cal Fire's Fire Hazard Severity Zones
 </div>
 
 
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
+Rather than pick an arbitrary buffer size, like 5 Km or something subjective and prone to sensitivity issues (*this is the big issue I have with buffer analyses*), I decided to compute a continuous buffer from 1-60 Km to get a sense of how the fire hazard environment changes over distance. 
+
+# Computing the Buffers
+
+I understand why computing continuous buffers isn't common, it can get pretty messy. I have 500 site points, and three FHSZ values (Moderate, High, Very High), and I want to calcultae the proportion of area each FHSZ occuppies throughout the continuous buffer (ie %Very High, %High, etc). 
+
+I thought this would be a good oportunity for parallel computing - its the same redundant calculation over and over again. So rather than just for-loop it (or apply it), I used the `foreach` package to parallelize a for-loop to calculate the percent area of each risk zone, for each buffer size from 1-60km.
+
+## Registering clusters for parallel computation
+
 
 {% raw %}
-```html
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.html path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.html path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
+```r
+library(parallel)
+library(doParallel)
+
+cores <- detectCores()
+cl <- makeCluster(cores[1]-1)
+registerDoParallel(cl)
 ```
 {% endraw %}
+
+## The Loop
+
+
+{% raw %}
+```r
+mod <- list()
+high <- list()
+vhigh <- list()
+all <- list()
+cbuff <- foreach(i = 1:50) %dopar% {
+  library(sf)
+  buff        <- st_intersection(st_buffer(sites.sf[,1], i*1000), cali) 
+  
+  buff.area <- st_area(buff)
+  mod[[i]]    <- st_intersection(risk[2,], buff)
+  mod[[i]]$buff <- i*1000
+  mod[[i]]$area <- as.numeric(st_area(mod[[i]]))
+  mod[[i]] <- st_drop_geometry(mod[[i]])
+  
+  high[[i]]    <- st_intersection(risk[1,], buff)
+  high[[i]]$buff <- i*1000
+  high[[i]]$area <- as.numeric(st_area(high[[i]]))
+  high[[i]] <- st_drop_geometry(high[[i]])
+
+  vhigh[[i]]    <- st_intersection(risk[4,], buff)
+  vhigh[[i]]$buff <- i*1000
+  vhigh[[i]]$area <- as.numeric(st_area(vhigh[[i]]))
+  vhigh[[i]] <- st_drop_geometry(vhigh[[i]])
+  
+  all[[i]] <- c(mod[i], high[i], vhigh[i])
+  all
+}
+
+stopCluster(cl)
+end <- proc.time()
+
+ttime <- end - st
+```
+{% endraw %}
+
+
+{% raw %}
+```r
+df.mod <- as.data.frame(do.call(rbind, mod))
+df.high <- as.data.frame(do.call(rbind, high))
+df.vhigh <- as.data.frame(do.call(rbind, vhigh))
+
+df <- bind_rows(df.high, df.mod, df.vhigh)
+
+lapply(list(df.mod, df.high, df.vhigh), function(x){rm(x)})
+```
+{% endraw %}
+
+
+{% raw %}
+```r
+library(magick)
+## list file names and read in
+imgs <- list.files("plots/gif", full.names = TRUE)
+img_list <- lapply(imgs, image_read)
+
+## join the images together
+img_joined <- image_join(img_list)
+
+## animate at 2 frames per second
+img_animated <- image_animate(img_joined, fps = 2)
+
+
+## save to disk
+image_write(image = img_animated,
+            path = "plots/cont_buff2.gif")
+
+```
+
+{% endraw %}
+
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/cont_buff.gif" title="example image" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    Gif!!
+</div>
