@@ -14,7 +14,7 @@ The sites are spread throughout California, and I have a suspicion there's some 
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/sitemap.png" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.html path="assets/img/sitemap.png" title="Site Map" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
@@ -25,7 +25,7 @@ Then, I've got this underlying Fire Hazard Severity Map from CALFIRE.
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/FHSZ.png" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.html path="assets/img/FHSZ.png" title="FHSZ" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
@@ -134,7 +134,7 @@ image_write(image = img_animated,
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/cont_buff.gif" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.html path="assets/img/cont_buff2.gif" title="Final GIF" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
