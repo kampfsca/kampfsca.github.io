@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Spatial Statistics, Public Health, and some slapdash programming
+subtitle: Spatial Statistics. Public Health. Slapdash Programming.
 
 profile:
   align: right
