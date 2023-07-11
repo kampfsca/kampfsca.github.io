@@ -41,12 +41,12 @@
       institution: University of Southern California
       year: 2022-2023
       description:
-        - SSCI 165gl: Sustainability Science in the City
+        - title: SSCI 165gl: Sustainability Science in the City
           contents:
-            - Instructor: Robert Vos, PhD
-        - SSCI 301l: Maps and Spatial Reasoning
+            - Instructor Robert Vos, PhD
+        - title: SSCI 301l: Maps and Spatial Reasoning
           contents:
-            - Instructor: John P. Wilson, PhD
+            - Instructor John P. Wilson, PhD
     - title: Visiting Professor
       institution: California Institute of Technology, Pasadena, California, US
       year: 1933
