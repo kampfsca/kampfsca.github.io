@@ -9,7 +9,7 @@
 - title: Education
   type: time_table
   contents:
-    - title: PhD
+    - title: PhD (Population, Health and Place)
       institution: University of Southern California
       year: 2021-Present
       description:
@@ -19,26 +19,34 @@
           contents:
             - Sub-description 1.
             - Sub-description 2.
-    - title: Federal teaching diploma
-      institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
-      year: 1900
+    - title: MS (Biostatistics)
+      institution: Grand Valley State University
+      year: 2014-2016
       description:
-        - Description 1.
-        - Description 2.
+        - Frequentist statistics aplied to the biological sciences
+        - Coursework in survival analysis, design of experiements, categorical data analysis, and clinical trials
+        - SAS, R, and JMP (JSL) programming
+        - Mu Sigma Rho Statistical Honors Society Member
+     - title: BS (Biology)
+      institution: Grand Valley State University
+      year: 2010-2013
+      description:
+        - Applied statistics minor
+        - A lot of unscrupulous coursework
 
 - title: Experience
   type: time_table
   contents:
-    - title: Professor of Theoretical Physics
-      institution: Institute for Advanced Study, Princeton University
-      year: 1933 - 1955
+    - title: Teaching Assistant
+      institution: University of Southern California
+      year: 2022-2023
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
+        - SSCI 165gl: Sustainability Science in the City
           contents:
-            - Sub-description 1.
-            - Sub-description 2.
+            - Instructor: Robert Vos, PhD
+        - SSCI 301l: Maps and Spatial Reasoning
+          contents:
+            - Instructor: John P. Wilson, PhD
     - title: Visiting Professor
       institution: California Institute of Technology, Pasadena, California, US
       year: 1933
