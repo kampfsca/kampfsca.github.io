@@ -1,25 +1,24 @@
----
 layout: about
 title: about
 permalink: /
 subtitle: Spatial Statistics. Public Health. Slapdash Programming.
 
 profile:
-  align: right
-  image: prof_pic.jpg
-  image_circular: false # crops the image to make it circular
-  address: >
-    <p>University of Southern California</p>
-    <p>3616 Trousdale Parkway</p>
-    <p>Los Angeles, CA 90089</p>
+align: right
+image: prof_pic.jpg
+image_circular: false # crops the image to make it circular
+address: >
+<p>Children's Hospital of Philadelphia</p>
+<p>Philadelphia, PA</p>
 
-news: false  # includes a list of news items
-latest_posts: false  # includes a list of the newest posts
+news: false # includes a list of news items
+latest_posts: false # includes a list of the newest posts
 selected_papers: true # includes a list of papers marked as "selected={true}"
-social: true  # includes social icons at the bottom of the page
----
+social: true # includes social icons at the bottom of the page
+My name is Andy Kampfschulte. I recently completed my PhD from the University of Southern California's Population, Health and Place program, where my dissertation — Spatial and Statistical Methods in Health Research — examined how incorporating spatial context shapes the questions we ask and the methods we use in public health inquiry. I now work as a Principal Bioinformatics Scientist at the Children's Hospital of Philadelphia, where I apply spatial methods to risk stratification of pediatric patients.
 
-My name is Andy Kampfschulte, I am a PhD candidate at the University of Southern California's Population, Health and Place program. I enjoy exploring the intersection of spatial statistics and public health; my research works to improve and shed light on statistical considerations in how we tackle issues in healthcare access, neighborhood influences, and health outcomes. Spatial context is important when evaluating peoples exposures, and we need to make sure we are asking the right questions and using the right methods when incorporating a spatial dimension.
+My work sits at the intersection of spatial statistics, clinical informatics, and population health. I am broadly interested in how the places people live, receive care, and grow up shape health outcomes — and in making sure the analytical frameworks we use are up to the task of capturing that complexity. At CHOP, that means developing spatially-informed tools that help clinicians and researchers better understand heterogeneity in pediatric risk.
 
+I am a devoted R programmer and a tireless advocate for reproducible research and open science — occasionally to the annoyance of my collaborators. I also have a soft spot for LaTeX.
 I really like R programming, LateX, and musing about the importance of reproducible research. I try to extol the values of openscience wherever I can, much to the annoyance of my peers.
 
